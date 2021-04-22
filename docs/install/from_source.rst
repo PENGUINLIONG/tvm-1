@@ -87,7 +87,9 @@ The configuration of TVM can be modified by `config.cmake`.
 
   - On macOS, for some versions of Xcode, you need to add ``-lc++abi`` in the LDFLAGS or you'll get link errors.
   - Change ``set(USE_CUDA OFF)`` to ``set(USE_CUDA ON)`` to enable CUDA backend. Do the same for other backends and libraries
-    you want to build for (OpenCL, RCOM, METAL, VULKAN, ...).
+    you want to build for (OpenCL, RCOM, METAL, Vulkan, ...).
+  - If the tuning target is not the host platform itself, you usually don't need to enable the same backends on the host side (OpenCL, Vulkan, ...).
+    Doing so enforces the creation of a global backend context when TVM is brought up, even it is never used later.
   - To help with debugging, ensure the embedded graph executor and debugging functions are enabled with ``set(USE_GRAPH_EXECUTOR ON)`` and ``set(USE_PROFILER ON)``
 
 - TVM requires LLVM for for CPU codegen. We highly recommend you to build with the LLVM support on.
